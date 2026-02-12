@@ -19,6 +19,7 @@ import {
   Input,
 } from '@/components/ui';
 import { useAuthContext } from '@/features/auth';
+import { getPbErrorMessage } from '@/lib/pocketbase';
 
 const registerSchema = z
   .object({
@@ -60,9 +61,7 @@ export function RegisterPage() {
       toast.success('Регистрация успешна');
       navigate('/', { replace: true });
     } catch (error) {
-      const err = error as { message?: string; data?: Record<string, { message?: string }> };
-      const msg = err.data?.email?.message ?? err.data?.username?.message ?? err.message;
-      toast.error(msg ?? 'Ошибка регистрации');
+      toast.error(getPbErrorMessage(error, ['email', 'username', 'password']));
     }
   };
 

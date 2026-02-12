@@ -5,3 +5,5 @@ export { GoalPage } from './GoalPage';
 export { ProfilePage } from './ProfilePage';
 export { SettingsPage } from './SettingsPage';
 export { NewGoalPage } from './NewGoalPage';
+export { CreateGoalPage } from './CreateGoalPage';
+export { GoalsPage } from './GoalsPage';

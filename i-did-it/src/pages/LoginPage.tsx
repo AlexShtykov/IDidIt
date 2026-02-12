@@ -19,6 +19,7 @@ import {
   Input,
 } from '@/components/ui';
 import { useAuthContext } from '@/features/auth';
+import { getPbErrorMessage } from '@/lib/pocketbase';
 
 const loginSchema = z.object({
   email: z.string().min(1, 'Введите email').email('Некорректный email'),
@@ -42,11 +43,11 @@ export function LoginPage() {
       toast.success('Вход выполнен');
       navigate('/', { replace: true });
     } catch (error) {
-      const err = error as { status?: number; message?: string };
+      const err = error as { status?: number };
       if (err.status === 400) {
         toast.error('Неверный email или пароль');
       } else {
-        toast.error(err.message ?? 'Ошибка входа');
+        toast.error(getPbErrorMessage(error));
       }
     }
   };
@@ -57,8 +58,7 @@ export function LoginPage() {
       toast.success('Вход выполнен');
       navigate('/', { replace: true });
     } catch (error) {
-      const err = error as { status?: number; message?: string };
-      toast.error(err.message ?? 'Ошибка входа через OAuth');
+      toast.error(getPbErrorMessage(error));
     }
   };
 

@@ -9,9 +9,10 @@ import {
   LoginPage,
   RegisterPage,
   GoalPage,
+  GoalsPage,
   ProfilePage,
   SettingsPage,
-  NewGoalPage,
+  CreateGoalPage,
 } from './pages';
 import './App.css';
 
@@ -25,10 +26,18 @@ function AppRoutes() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route
+          path="/goals"
+          element={
+            <ProtectedRoute>
+              <GoalsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/goals/new"
           element={
             <ProtectedRoute>
-              <NewGoalPage />
+              <CreateGoalPage />
             </ProtectedRoute>
           }
         />

@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/features/auth';
 import { getAvatarUrl } from '@/features/auth/getAvatarUrl';
-import type { User } from '@/features/auth/types';
+import type { User as AuthUser } from '@/features/auth/types';
 import {
   Button,
   Input,
@@ -31,7 +31,7 @@ import {
 } from '@/components/ui';
 import { cn } from '@/lib/utils';
 
-function getInitials(user: User): string {
+function getInitials(user: AuthUser): string {
   if (user.first_name && user.last_name) {
     return `${user.first_name[0]}${user.last_name[0]}`.toUpperCase();
   }

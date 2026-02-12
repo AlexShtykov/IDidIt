@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { pb } from '@/lib/pocketbase';
+import { pb, getPbErrorMessage } from '@/lib/pocketbase';
 import type { User } from './types';
 
 interface AuthState {
@@ -57,14 +57,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const signUp = useCallback(
     async (email: string, password: string, data?: Record<string, unknown>) => {
-      await pb.collection('users').create({
-        ...data,
-        email,
-        password,
-        passwordConfirm: (data?.passwordConfirm as string) ?? password,
-      });
-      await pb.collection('users').authWithPassword(email, password);
-      setUser(pb.authStore.model as User);
+      try {
+        await pb.collection('users').create({
+          ...data,
+          email,
+          password,
+          passwordConfirm: (data?.passwordConfirm as string) ?? password,
+        });
+        await pb.collection('users').authWithPassword(email, password);
+        setUser(pb.authStore.model as User);
+      } catch (err: unknown) {
+        throw new Error(getPbErrorMessage(err, ['email', 'username', 'password']));
+      }
     },
     []
   );
