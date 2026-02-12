@@ -132,6 +132,33 @@
 
 ---
 
+## Коллекция: entries
+
+Тип: **Base collection**
+
+### Поля
+
+| Поле | Тип | Настройки |
+|------|-----|-----------|
+| goal | relation | → goals, required, single, **cascade delete** |
+| user | relation | → users, required, single (автор / владелец цели) |
+| content | text | required, max: 10000 |
+| attachments | file | multiple, max 10 (картинки и документы) |
+| likes_count | number | default: 0 |
+| comments_count | number | default: 0 |
+
+### API Rules для entries
+
+| Действие | Правило |
+|----------|--------|
+| List/Search | `""` |
+| View | `""` |
+| Create | `@request.auth.id = goal.user.id` — только автор цели может добавлять записи |
+| Update | `@request.auth.id = user.id` — только автор записи |
+| Delete | `@request.auth.id = user.id` — только автор записи |
+
+---
+
 ## Схема проекта
 
 Справочный файл схемы: [pb_schema.json](../pb_schema.json).  

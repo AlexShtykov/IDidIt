@@ -10,6 +10,7 @@ import {
   useToggleSubtask,
   useUpdateGoalStatus,
 } from '@/features/goals';
+import { EntryList } from '@/components/goals';
 import {
   Avatar,
   AvatarImage,
@@ -346,21 +347,7 @@ export function GoalPage() {
 
       {/* Дневник прогресса */}
       <section>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Дневник прогресса</CardTitle>
-            {isOwner && (
-              <Button variant="outline" size="sm" disabled>
-                Добавить запись
-              </Button>
-            )}
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground text-center py-6">
-              Записей пока нет
-            </p>
-          </CardContent>
-        </Card>
+        <EntryList goalId={goal.id} isOwner={isOwner} />
       </section>
 
       {/* Комментарии */}
