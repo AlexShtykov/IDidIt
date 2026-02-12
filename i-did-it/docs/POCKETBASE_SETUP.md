@@ -4,8 +4,10 @@
 
 1. Скачай PocketBase с https://pocketbase.io/docs/
 2. Распакуй в папку `pocketbase/` в корне проекта
-3. Запусти: `./pocketbase serve`
-4. Открой админку: http://127.0.0.1:8090/_/
+3. Запусти:
+   - **Linux/macOS:** `./pocketbase serve`
+   - **Windows PowerShell:** `.\pocketbase.exe serve` (обязательно `.\` — иначе команда не найдена)
+4. Открой админку: http://127.0.0   .1:8090/_/
 5. Создай админ-аккаунт
 
 ## Настройка коллекции users
