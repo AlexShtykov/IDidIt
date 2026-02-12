@@ -1,0 +1,4 @@
+{
+  "_comment": "Справочный файл для документации. Коллекции создаются через админку PocketBase. Экспорт схемы: ./pocketbase migrate collections",
+  "collections": []
+}
